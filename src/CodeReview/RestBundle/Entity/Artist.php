@@ -5,7 +5,7 @@ namespace CodeReview\RestBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CodeReview\RestBundle\Repository\ArtistRepository")
  * @ORM\Table(name="artist")
  */
 class Artist

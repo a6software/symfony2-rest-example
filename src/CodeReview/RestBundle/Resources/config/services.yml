@@ -1,4 +1,13 @@
 services:
-#    code_review_rest.example:
-#        class: CodeReview\RestBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    code_review.rest_bundle.artist_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - CodeReview\RestBundle\Entity\Artist
+
+
+    code_review.rest_bundle.artist_handler:
+        class: CodeReview\RestBundle\Handler\ArtistHandler
+        arguments:
+            - @code_review.rest_bundle.artist_repository
