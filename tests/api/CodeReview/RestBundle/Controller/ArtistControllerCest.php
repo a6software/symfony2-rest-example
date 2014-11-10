@@ -18,7 +18,7 @@ class ArtistControllerCest
         $i->wantTo('ensure Getting an invalid Artist id returns a 404 code');
 
         $i->sendGET('/api/artists/23623623.json');
-        $i->seeResponseCodeIs(200);
+        $i->seeResponseCodeIs(404);
         $i->seeResponseIsJson();
     }
 
@@ -40,5 +40,14 @@ class ArtistControllerCest
         ));
     }
 
+    public function getSecondValidArtist(ApiGuy $i)
+    {
+        $i->sendGET('/api/artists/2.json');
+        $i->seeResponseCodeIs(200);
+        $i->seeResponseIsJson();
 
+        $i->seeResponseContains(array(
+            'name'  => 'The Rolling Stones',
+        ));
+    }
 }

@@ -1,0 +1,4 @@
+rest_test_api:
+    type:     rest
+    resource: "@CodeReviewRestBundle/Resources/config/routing.yml"
+    prefix: /api
