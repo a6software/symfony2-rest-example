@@ -35,8 +35,8 @@ class ArtistControllerCest
         $i->seeResponseCodeIs(200);
         $i->seeResponseIsJson();
 
-        $i->seeResponseContains(array(
-            'name'  => 'The Beatles',
+        $i->seeResponseContainsJson(array(
+            "name"  => "The Beatles",
         ));
     }
 
@@ -46,7 +46,7 @@ class ArtistControllerCest
         $i->seeResponseCodeIs(200);
         $i->seeResponseIsJson();
 
-        $i->seeResponseContains(array(
+        $i->seeResponseContainsJson(array(
             'name'  => 'The Rolling Stones',
         ));
     }

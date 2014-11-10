@@ -1,3 +1,4 @@
 artists:
     prefix:     /artists
     resource:   "@CodeReviewRestBundle/Resources/config/routing/artists.yml"
+    type: rest

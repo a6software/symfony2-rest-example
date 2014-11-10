@@ -12,4 +12,4 @@ modules:
         - WebHelper
     config:
         PhpBrowser:
-            url: 'http://import-manager.dev/app_codecept_test.php'
+            url: 'http://rest_test.dev/app_codecept_test.php'

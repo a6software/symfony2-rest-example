@@ -18,6 +18,18 @@ class LoadArtistData extends AbstractFixture implements OrderedFixtureInterface
         $a->setName('The Beatles');
 
         $manager->persist($a);
+
+
+
+
+        $a = new Artist();
+        $a->setName('The Rolling Stones');
+
+        $manager->persist($a);
+
+
+
+
         $manager->flush();
 
         $this->addReference('artist-1', $a);
