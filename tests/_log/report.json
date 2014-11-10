@@ -1,0 +1,20 @@
+{
+    "event": "suiteStart",
+    "suite": "api",
+    "tests": 1
+}{
+    "event": "testStart",
+    "suite": "api",
+    "test": " (MCM\/ApiBundle\/Controller\/Security\/0003_CanLogInWithGoodCredentialsCept.php)"
+}{
+    "event": "test",
+    "suite": "api",
+    "test": " (MCM\/ApiBundle\/Controller\/Security\/0003_CanLogInWithGoodCredentialsCept.php)",
+    "status": "pass",
+    "time": 17.557495117188,
+    "trace": [
+
+    ],
+    "message": "",
+    "output": ""
+}

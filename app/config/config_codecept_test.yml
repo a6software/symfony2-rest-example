@@ -1,0 +1,9 @@
+imports:
+    - { resource: config_prod.yml }
+
+framework:
+    profiler: { only_exceptions: false }
+
+doctrine:
+    dbal:
+        dbname:   "%testing_database_name%"

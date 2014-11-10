@@ -1,0 +1,3 @@
+code_review_rest_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: CodeReviewRestBundle:Default:index }
