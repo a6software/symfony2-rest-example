@@ -69,5 +69,13 @@ swiftmailer:
     spool:     { type: memory }
 
 
+sensio_framework_extra:
+    view:    { annotations: false }
 
-#nelmio_api_doc: ~
+
+fos_rest:
+    view:
+        view_response_listener: 'force'
+
+
+nelmio_api_doc: ~

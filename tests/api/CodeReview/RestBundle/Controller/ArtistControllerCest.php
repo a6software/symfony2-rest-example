@@ -1,5 +1,6 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Response;
 use \ApiGuy;
 
 class ArtistControllerCest
@@ -17,37 +18,38 @@ class ArtistControllerCest
     {
         $i->wantTo('ensure Getting an invalid Artist id returns a 404 code');
 
-        $i->sendGET('/api/artists/23623623.json');
-        $i->seeResponseCodeIs(404);
+        $i->sendGET(ApiArtistPage::route('23623623.json'));
+        $i->seeResponseCodeIs(Response::HTTP_NOT_FOUND);
         $i->seeResponseIsJson();
     }
 
     public function ensureDefaultResponseTypeIsJson(ApiGuy $i)
     {
-        $i->sendGET('/api/artists/1');
-        $i->seeResponseCodeIs(200);
+        $i->sendGET(ApiArtistPage::route('1'));
+        $i->seeResponseCodeIs(Response::HTTP_OK);
         $i->seeResponseIsJson();
     }
 
     public function getValidArtist(ApiGuy $i)
     {
-        $i->sendGET('/api/artists/1.json');
-        $i->seeResponseCodeIs(200);
-        $i->seeResponseIsJson();
+        foreach ($this->validArtistProvider() as $data) {
+            $i->sendGET(ApiArtistPage::route($data[0] . '.json'));
+            $i->seeResponseCodeIs(Response::HTTP_OK);
+            $i->seeResponseIsJson();
 
-        $i->seeResponseContainsJson(array(
-            "name"  => "The Beatles",
-        ));
+            $i->seeResponseContainsJson($data[1]);
+        }
     }
 
-    public function getSecondValidArtist(ApiGuy $i)
+    private function validArtistProvider()
     {
-        $i->sendGET('/api/artists/2.json');
-        $i->seeResponseCodeIs(200);
-        $i->seeResponseIsJson();
-
-        $i->seeResponseContainsJson(array(
-            'name'  => 'The Rolling Stones',
-        ));
+        return array(
+            array('1', array(
+                "name"  => "The Beatles",
+            )),
+            array('2', array(
+                "name"  => "The Rolling Stones",
+            )),
+        );
     }
 }

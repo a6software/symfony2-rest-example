@@ -14,25 +14,17 @@ class LoadArtistData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $a = new Artist();
-        $a->setName('The Beatles');
+        foreach ($this->getData() as $data) {
 
-        $manager->persist($a);
+            $a = new Artist();
+            $a->setName($data['name']);
 
+            $manager->persist($a);
+            $this->addReference($data['reference'], $a);
 
-
-
-        $a = new Artist();
-        $a->setName('The Rolling Stones');
-
-        $manager->persist($a);
-
-
-
+        }
 
         $manager->flush();
-
-        $this->addReference('artist-1', $a);
     }
 
     /**
@@ -41,5 +33,20 @@ class LoadArtistData extends AbstractFixture implements OrderedFixtureInterface
     public function getOrder()
     {
         return 100; // the order in which fixtures will be loaded
+    }
+
+
+    private function getData()
+    {
+        return array(
+            array(
+                'name' => 'The Beatles',
+                'reference' => 'artist-1',
+            ),
+            array(
+                'name' => 'The Rolling Stones',
+                'reference' => 'artist-2',
+            )
+        );
     }
 }
