@@ -76,5 +76,9 @@ sensio_framework_extra:
 fos_rest:
     view:
         view_response_listener: 'force'
+    format_listener:
+        rules:
+            - { path: ^/api, priorities: [ json, xml ], fallback_format: json, prefer_extension: true }
+
 
 nelmio_api_doc: ~

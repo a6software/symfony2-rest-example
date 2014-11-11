@@ -52,5 +52,4 @@ class ArtistController extends FOSRestController
     {
         return $this->get('code_review.rest_bundle.artist_handler');
     }
-
 }

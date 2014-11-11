@@ -1,3 +1,4 @@
 artists:
     resource: CodeReview\RestBundle\Controller\ArtistController
     type: rest
+
