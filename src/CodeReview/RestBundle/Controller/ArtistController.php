@@ -3,7 +3,8 @@
 namespace CodeReview\RestBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Routing\ClassResourceInterface;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -34,6 +35,20 @@ class ArtistController extends FOSRestController
     public function getArtistAction($id)
     {
         return $this->getOr404($id);
+    }
+
+    /**
+     * @QueryParam(name="limit", requirements="\d+", default="10", description="our limit")
+     * @QueryParam(name="offset", requirements="\d+", nullable=true, default="0", description="our offset")
+     *
+     * @return array
+     */
+    public function getArtistsAction(Request $request, ParamFetcherInterface $paramFetcher)
+    {
+        $limit = $paramFetcher->get('limit');
+        $offset = $paramFetcher->get('offset');
+
+        return $this->getHandler()->all($limit, $offset);
     }
 
     protected function getOr404($id)

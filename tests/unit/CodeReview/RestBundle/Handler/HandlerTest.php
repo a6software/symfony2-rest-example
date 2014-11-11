@@ -56,6 +56,24 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCanGetAll()
+    {
+        $data = array(1, 2);
+
+        $repo = $this->getMockRepository();
+        $repo->expects($this->once())
+            ->method('findBy')
+            ->will($this->returnValue($data))
+        ;
+
+        $handler = $this->getHandler($repo);
+
+        $this->assertEquals(
+            $data,
+            $handler->all(1,1)
+        );
+    }
+
     /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */

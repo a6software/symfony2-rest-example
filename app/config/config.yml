@@ -79,6 +79,8 @@ fos_rest:
     format_listener:
         rules:
             - { path: ^/api, priorities: [ json, xml ], fallback_format: json, prefer_extension: true }
-
+    routing_loader:
+        include_format: false
+    param_fetcher_listener: true
 
 nelmio_api_doc: ~

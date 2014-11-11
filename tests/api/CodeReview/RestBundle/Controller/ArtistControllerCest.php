@@ -25,7 +25,7 @@ class ArtistControllerCest
 
     public function ensureDefaultResponseTypeIsJson(ApiGuy $i)
     {
-        $i->sendGET(ApiArtistPage::route('1'));
+        $i->sendGET(ApiArtistPage::route('/1'));
         $i->seeResponseCodeIs(Response::HTTP_OK);
         $i->seeResponseIsJson();
     }
@@ -33,7 +33,7 @@ class ArtistControllerCest
     public function getValidArtist(ApiGuy $i)
     {
         foreach ($this->validArtistProvider() as $data) {
-            $i->sendGET(ApiArtistPage::route($data[0] . '.json'));
+            $i->sendGET(ApiArtistPage::route('/' . $data[0] . '.json'));
             $i->seeResponseCodeIs(Response::HTTP_OK);
             $i->seeResponseIsJson();
 
@@ -51,5 +51,55 @@ class ArtistControllerCest
                 "name"  => "The Rolling Stones",
             )),
         );
+    }
+
+    public function getArtistsCollection(ApiGuy $i)
+    {
+        $i->sendGET(ApiArtistPage::$URL);
+        $i->seeResponseCodeIs(Response::HTTP_OK);
+        $i->seeResponseIsJson();
+        $i->seeResponseContainsJson(array(
+            array(
+                'id' => 1,
+                "name"  => "The Beatles",
+            ),
+            array(
+                'id' => 2,
+                "name"  => "The Rolling Stones",
+            )
+        ));
+    }
+
+    public function getArtistsCollectionWithLimit(ApiGuy $i)
+    {
+        $i->sendGET(ApiArtistPage::route('?limit=1'));
+        $i->seeResponseCodeIs(Response::HTTP_OK);
+        $i->seeResponseIsJson();
+        $i->seeResponseContainsJson(array(
+            array(
+                'id' => 1,
+                "name"  => "The Beatles",
+            ),
+        ));
+    }
+
+    public function getArtistsCollectionWithOffset(ApiGuy $i)
+    {
+        $i->sendGET(ApiArtistPage::route('?offset=1'));
+        $i->seeResponseCodeIs(Response::HTTP_OK);
+        $i->seeResponseIsJson();
+        $i->seeResponseContainsJson(array(
+            "name"  => "The Rolling Stones"
+        ));
+    }
+
+    public function getArtistsCollectionWithLimitAndOffset(ApiGuy $i)
+    {
+        $i->sendGET(ApiArtistPage::route('?offset=1&limit=3'));
+        $i->seeResponseCodeIs(Response::HTTP_OK);
+        $i->seeResponseIsJson();
+        $i->seeResponseContainsJson(array(
+            "name"  => "The Rolling Stones"
+        ));
     }
 }

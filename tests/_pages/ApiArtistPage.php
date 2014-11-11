@@ -3,7 +3,7 @@
 class ApiArtistPage
 {
     // include url of current page
-    public static $URL = '/api/artists/';
+    public static $URL = '/api/artists';
 
     /**
      * Declare UI map for this page here. CSS or XPath allowed.

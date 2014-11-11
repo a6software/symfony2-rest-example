@@ -21,4 +21,16 @@ class ArtistHandler implements HandlerInterface
     {
         return $this->repository->find($id);
     }
+
+    /**
+     * @param $limit
+     * @param $offset
+     * @return array
+     */
+    public function all($limit, $offset)
+    {
+        return $this->repository->findBy(array(), array(), $limit, $offset);
+    }
+
+
 }
