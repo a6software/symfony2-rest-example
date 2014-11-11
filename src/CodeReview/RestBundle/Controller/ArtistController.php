@@ -4,11 +4,12 @@ namespace CodeReview\RestBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\Controller\Annotations\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
-class ArtistController extends FOSRestController implements ClassResourceInterface
+class ArtistController extends FOSRestController
 {
     /**
      * Returns an Artist when given a valid id
@@ -30,7 +31,7 @@ class ArtistController extends FOSRestController implements ClassResourceInterfa
      *
      * @return array
      */
-    public function getAction($id)
+    public function getArtistAction($id)
     {
         return $this->getOr404($id);
     }

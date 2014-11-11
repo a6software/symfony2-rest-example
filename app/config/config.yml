@@ -77,5 +77,4 @@ fos_rest:
     view:
         view_response_listener: 'force'
 
-
 nelmio_api_doc: ~
