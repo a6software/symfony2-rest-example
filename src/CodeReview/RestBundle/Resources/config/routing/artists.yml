@@ -1,6 +1,0 @@
-artist_get:
-    pattern: /{id}
-    defaults: { _controller: CodeReviewRestBundle:Artist:get, _format: json }
-    methods: GET
-    requirements:
-        id: \d+
