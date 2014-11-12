@@ -2,15 +2,19 @@
 
 namespace CodeReview\RestBundle\Handler;
 
+use CodeReview\RestBundle\Entity\Artist;
+use CodeReview\RestBundle\Form\Handler\FormHandler;
 use CodeReview\RestBundle\Repository\ArtistRepository;
 
 class ArtistHandler implements HandlerInterface
 {
     private $repository;
+    private $formHander;
 
-    public function __construct(ArtistRepository $artistRepository)
+    public function __construct(ArtistRepository $artistRepository, FormHandler $formHandler)
     {
         $this->repository = $artistRepository;
+        $this->formHander = $formHandler;
     }
 
     /**
@@ -30,6 +34,19 @@ class ArtistHandler implements HandlerInterface
     public function all($limit, $offset)
     {
         return $this->repository->findBy(array(), array(), $limit, $offset);
+    }
+
+    /**
+     * @param array $parameters
+     * @return mixed
+     */
+    public function post(array $parameters)
+    {
+        return $this->formHander->processForm(
+            new Artist(),
+            $parameters,
+            "POST"
+        );
     }
 
 

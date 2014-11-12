@@ -90,6 +90,10 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
      */
     private function getHandler($repo)
     {
-        return new \CodeReview\RestBundle\Handler\ArtistHandler($repo);
+        $handler = $this->getMockBuilder('CodeReview\RestBundle\Form\Handler\FormHandler')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        return new \CodeReview\RestBundle\Handler\ArtistHandler($repo, $handler);
     }
 }

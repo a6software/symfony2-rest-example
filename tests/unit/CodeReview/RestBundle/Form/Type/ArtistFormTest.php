@@ -18,7 +18,7 @@ class ArtistFormTest extends Symfony\Component\Form\Test\TypeTestCase
             'name' => 'test',
         );
 
-        $type = new \CodeReview\RestBundle\Form\ArtistType();
+        $type = new \CodeReview\RestBundle\Form\Type\ArtistType();
         $form = $this->factory->create($type);
 
         $object = new \CodeReview\RestBundle\Entity\Artist();

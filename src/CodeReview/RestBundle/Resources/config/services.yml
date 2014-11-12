@@ -11,3 +11,18 @@ services:
         class: CodeReview\RestBundle\Handler\ArtistHandler
         arguments:
             - @code_review.rest_bundle.artist_repository
+            - @code_review.rest_bundle.form.handler.artist_form_handler
+
+
+    code_review.rest_bundle.form.type.artist:
+        class: CodeReview\RestBundle\Form\Type\ArtistType
+        tags:
+            - { name: form.type, alias: artist_form }
+
+
+    code_review.rest_bundle.form.handler.artist_form_handler:
+        class: CodeReview\RestBundle\Form\Handler\FormHandler
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @form.factory
+            - @code_review.rest_bundle.form.type.artist

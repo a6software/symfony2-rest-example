@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeReview\RestBundle\Form;
+namespace CodeReview\RestBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

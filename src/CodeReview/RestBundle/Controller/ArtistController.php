@@ -3,6 +3,7 @@
 namespace CodeReview\RestBundle\Controller;
 
 use CodeReview\RestBundle\Entity\Artist;
+use CodeReview\RestBundle\Exception\InvalidFormException;
 use CodeReview\RestBundle\Form\ArtistType;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
@@ -54,29 +55,33 @@ class ArtistController extends FOSRestController
         return $this->getHandler()->all($limit, $offset);
     }
 
-
+    /**
+     * @View()
+     *
+     * @param Request $request
+     * @return array|\FOS\RestBundle\View\View|null
+     */
     public function postArtistAction(Request $request)
     {
-        $form = $this->createForm(new ArtistType(), new Artist(), array(
-            'method'            => 'POST',
-            'csrf_protection'   => false,
-        ));
+        try {
 
-        $form->submit($request->request->all());
+            $artist = $this->getHandler()->post(
+                $request->request->all()
+            );
 
-        if ( ! $form->isValid()) {
-            return $form;
+            $routeOptions = array(
+                'id'        => $artist->getId(),
+                '_format'    => $request->get('_format'),
+            );
+
+            return $this->redirectView(
+                $this->generateUrl('get_artist', $routeOptions),
+                Response::HTTP_CREATED
+            );
+
+        } catch (InvalidFormException $e) {
+            return $e->getForm();
         }
-
-        $artist = $form->getData();
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($artist);
-        $em->flush();
-
-        return $this->redirectView(
-            $this->generateUrl('get_artist', array('id'=>$artist->getId())),
-            Response::HTTP_CREATED
-        );
     }
 
     protected function getOr404($id)
