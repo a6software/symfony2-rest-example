@@ -2,10 +2,13 @@
 
 namespace CodeReview\RestBundle\Controller;
 
+use CodeReview\RestBundle\Entity\Artist;
+use CodeReview\RestBundle\Form\ArtistType;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\Controller\Annotations\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -49,6 +52,31 @@ class ArtistController extends FOSRestController
         $offset = $paramFetcher->get('offset');
 
         return $this->getHandler()->all($limit, $offset);
+    }
+
+
+    public function postArtistAction(Request $request)
+    {
+        $form = $this->createForm(new ArtistType(), new Artist(), array(
+            'method'            => 'POST',
+            'csrf_protection'   => false,
+        ));
+
+        $form->submit($request->request->all());
+
+        if ( ! $form->isValid()) {
+            exit($form->getErrors());
+        }
+
+        $artist = $form->getData();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($artist);
+        $em->flush();
+
+        return $this->redirectView(
+            $this->generateUrl('get_artist', array('id'=>$artist->getId())),
+            Response::HTTP_CREATED
+        );
     }
 
     protected function getOr404($id)
