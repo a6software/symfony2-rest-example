@@ -65,7 +65,7 @@ class ArtistController extends FOSRestController
         $form->submit($request->request->all());
 
         if ( ! $form->isValid()) {
-            exit($form->getErrors());
+            return $form;
         }
 
         $artist = $form->getData();
