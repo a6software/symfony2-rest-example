@@ -65,4 +65,14 @@ class ArtistHandler implements HandlerInterface
     }
 
 
+    public function patch(ArtistInterface $artistInterface, array $parameters)
+    {
+        return $this->formHander->processForm(
+            $artistInterface,
+            $parameters,
+            "PATCH"
+        );
+    }
+
+
 }

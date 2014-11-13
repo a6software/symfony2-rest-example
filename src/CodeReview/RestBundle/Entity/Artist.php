@@ -26,6 +26,12 @@ class Artist implements ArtistInterface
      */
     private $name;
 
+    /**
+     * @var string
+     * @ORM\Column(name="dob", type="datetime")
+     */
+    private $dob;
+
 
     /**
      * Get id
@@ -54,6 +60,25 @@ class Artist implements ArtistInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDob()
+    {
+        return $this->dob;
+    }
+
+    /**
+     * @param string $dob
+     * @return Artist
+     */
+    public function setDob($dob)
+    {
+        $this->dob = $dob;
 
         return $this;
     }

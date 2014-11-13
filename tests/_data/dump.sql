@@ -7,7 +7,7 @@
 #
 # Host: 192.168.1.156 (MySQL 5.5.37-0ubuntu0.14.04.1)
 # Database: rest
-# Generation Time: 2014-11-10 12:53:35 +0000
+# Generation Time: 2014-11-13 16:16:34 +0000
 # ************************************************************
 
 
@@ -28,16 +28,17 @@ DROP TABLE IF EXISTS `artist`;
 CREATE TABLE `artist` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `dob` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 LOCK TABLES `artist` WRITE;
 /*!40000 ALTER TABLE `artist` DISABLE KEYS */;
 
-INSERT INTO `artist` (`id`, `name`)
+INSERT INTO `artist` (`id`, `name`, `dob`)
 VALUES
-	(1,'The Beatles'),
-	(2,'The Rolling Stones');
+	(1,'The Beatles','1984-11-13 16:16:05'),
+	(2,'The Rolling Stones','1969-12-09 20:22:05');
 
 /*!40000 ALTER TABLE `artist` ENABLE KEYS */;
 UNLOCK TABLES;

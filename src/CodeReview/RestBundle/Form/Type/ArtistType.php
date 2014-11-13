@@ -16,6 +16,9 @@ class ArtistType extends AbstractType
     {
         $builder
             ->add('name', 'text')
+            ->add('dob', 'datetime', array(
+                'widget'    => 'single_text',
+            ))
         ;
     }
     

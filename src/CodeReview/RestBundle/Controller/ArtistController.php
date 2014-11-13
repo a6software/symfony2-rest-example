@@ -117,6 +117,28 @@ class ArtistController extends FOSRestController
     }
 
 
+    public function patchArtistAction(Request $request, $id)
+    {
+        try {
+
+            $artist = $this->getHandler()->patch(
+                $this->getOr404($id),
+                $request->request->all()
+            );
+
+            $routeOptions = array(
+                'id'        => $artist->getId(),
+                '_format'   => $request->get('_format')
+            );
+
+            return $this->routeRedirectView('get_artist', $routeOptions, Response::HTTP_NO_CONTENT);
+
+        } catch (InvalidFormException $e) {
+            return $e->getForm();
+        }
+    }
+
+
     protected function getOr404($id)
     {
         $handler = $this->getHandler();

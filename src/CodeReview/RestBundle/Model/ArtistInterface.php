@@ -10,4 +10,11 @@ interface ArtistInterface
      * @return mixed
      */
     public function getName();
+
+    /**
+     * Returns an Artist's date of birth
+     *
+     * @return mixed
+     */
+    public function getDob();
 }

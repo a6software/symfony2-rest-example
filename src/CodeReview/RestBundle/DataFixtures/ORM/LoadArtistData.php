@@ -18,6 +18,7 @@ class LoadArtistData extends AbstractFixture implements OrderedFixtureInterface
 
             $a = new Artist();
             $a->setName($data['name']);
+            $a->setDob($data['dob']);
 
             $manager->persist($a);
             $this->addReference($data['reference'], $a);
@@ -41,10 +42,12 @@ class LoadArtistData extends AbstractFixture implements OrderedFixtureInterface
         return array(
             array(
                 'name' => 'The Beatles',
+                'dob'   => new \DateTime('-30 years'),
                 'reference' => 'artist-1',
             ),
             array(
                 'name' => 'The Rolling Stones',
+                'dob'   => new \DateTime('-45 years 26 days 4 hours 6 minutes'),
                 'reference' => 'artist-2',
             )
         );
