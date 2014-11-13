@@ -2,13 +2,14 @@
 
 namespace CodeReview\RestBundle\Entity;
 
+use CodeReview\RestBundle\Model\ArtistInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="CodeReview\RestBundle\Repository\ArtistRepository")
  * @ORM\Table(name="artist")
  */
-class Artist
+class Artist implements ArtistInterface
 {
     /**
      * @var integer

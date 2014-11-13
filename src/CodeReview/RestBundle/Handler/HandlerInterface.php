@@ -2,6 +2,8 @@
 
 namespace CodeReview\RestBundle\Handler;
 
+use CodeReview\RestBundle\Model\ArtistInterface;
+
 interface HandlerInterface
 {
     /**
@@ -22,4 +24,11 @@ interface HandlerInterface
      * @return mixed
      */
     public function post(array $parameters);
+
+    /**
+     * @param ArtistInterface $artistInterface
+     * @param array           $parameters
+     * @return mixed
+     */
+    public function put(ArtistInterface $artistInterface, array $parameters);
 }

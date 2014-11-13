@@ -4,6 +4,7 @@ namespace CodeReview\RestBundle\Handler;
 
 use CodeReview\RestBundle\Entity\Artist;
 use CodeReview\RestBundle\Form\Handler\FormHandler;
+use CodeReview\RestBundle\Model\ArtistInterface;
 use CodeReview\RestBundle\Repository\ArtistRepository;
 
 class ArtistHandler implements HandlerInterface
@@ -46,6 +47,20 @@ class ArtistHandler implements HandlerInterface
             new Artist(),
             $parameters,
             "POST"
+        );
+    }
+
+    /**
+     * @param ArtistInterface $artistInterface
+     * @param array           $parameters
+     * @return mixed
+     */
+    public function put(ArtistInterface $artistInterface, array $parameters)
+    {
+        return $this->formHander->processForm(
+            $artistInterface,
+            $parameters,
+            "PUT"
         );
     }
 

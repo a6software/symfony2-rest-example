@@ -12,6 +12,7 @@ modules:
         - REST
         - ApiHelper
         - Db
+        - Asserts
     config:
         PhpBrowser:
             url: 'http://rest_test.dev/app_codecept_test.php'

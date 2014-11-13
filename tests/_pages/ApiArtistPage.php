@@ -16,12 +16,16 @@ class ApiArtistPage extends ApiBasePage
     * You can append any additional parameter to URL
     * and use it in tests like: EditPage::route('/123-post');
     */
-    public static function route($param, $withEnvironment = false)
+    public static function route($param, $withEnvironment = false, $withDomain = false)
     {
         $route = static::$URL.$param;
 
         if ($withEnvironment) {
             $route = self::$ENVIRONMENT . $route;
+        }
+
+        if ($withDomain) {
+            $route = self::$DOMAIN . $route;
         }
 
         return $route;
