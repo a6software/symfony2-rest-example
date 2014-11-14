@@ -64,7 +64,11 @@ class ArtistHandler implements HandlerInterface
         );
     }
 
-
+    /**
+     * @param ArtistInterface $artistInterface
+     * @param array           $parameters
+     * @return mixed
+     */
     public function patch(ArtistInterface $artistInterface, array $parameters)
     {
         return $this->formHander->processForm(
@@ -72,6 +76,16 @@ class ArtistHandler implements HandlerInterface
             $parameters,
             "PATCH"
         );
+    }
+
+
+    /**
+     * @param ArtistInterface $artistInterface
+     * @return mixed
+     */
+    public function delete(ArtistInterface $artistInterface)
+    {
+        return $this->formHander->delete($artistInterface);
     }
 
 

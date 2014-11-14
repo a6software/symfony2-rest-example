@@ -181,44 +181,67 @@ class ArtistControllerCest
 //    }
 
 
-    public function patchWithInvalidIdReturns404(ApiGuy $i)
+//    public function patchWithInvalidIdReturns404(ApiGuy $i)
+//    {
+//        $i->sendPATCH(ApiArtistPage::route('/214234.json'), array(
+//            'sdfdsfsdf' => 'asfsdfsd',
+//        ));
+//
+//        $i->seeResponseCodeIs(Response::HTTP_NOT_FOUND);
+//    }
+//
+//    public function patchWithValidIdAndInvalidDataReturns400ErrorCode(ApiGuy $i)
+//    {
+//        $i->sendPATCH(ApiArtistPage::route('/2.json'), array(
+//            'sdfdsfsdf' => 'asfsdfsd',
+//        ));
+//
+//        $i->seeResponseCodeIs(Response::HTTP_BAD_REQUEST);
+//    }
+//
+//    public function patchWithValidIdAndValidDataReturns204(ApiGuy $i)
+//    {
+//        $originalName = 'The Rolling Stones';
+//        $dob = new \DateTime('1900-01-01 00:00:00');
+//
+//        $i->sendPATCH(ApiArtistPage::route('/2.json'), array(
+//            'dob' => $dob->format('Y-m-d H:i:s'),
+//        ));
+//
+//        $newDob = $i->grabFromDatabase('artist', 'dob', array(
+//            'id'  => 2
+//        ));
+//
+//        $existingName = $i->grabFromDatabase('artist', 'name', array(
+//            'id'  => 2
+//        ));
+//
+//        $i->seeResponseCodeIs(Response::HTTP_NO_CONTENT);
+//        $i->canSeeHttpHeader('Location', ApiArtistPage::route('/2', true, true));
+//        $i->assertEquals($dob, new \DateTime($newDob));
+//        $i->assertEquals($originalName, $existingName);
+//    }
+
+    public function deleteWithInvalidArtistReturns404(ApiGuy $i)
     {
-        $i->sendPATCH(ApiArtistPage::route('/214234.json'), array(
-            'sdfdsfsdf' => 'asfsdfsd',
-        ));
+        $i->sendDELETE(ApiArtistPage::route('/60000.json'));
 
         $i->seeResponseCodeIs(Response::HTTP_NOT_FOUND);
     }
 
-    public function patchWithValidIdAndInvalidDataReturns400ErrorCode(ApiGuy $i)
+    public function deleteWithValidArtistReturns204(ApiGuy $i)
     {
-        $i->sendPATCH(ApiArtistPage::route('/2.json'), array(
-            'sdfdsfsdf' => 'asfsdfsd',
+        $i->seeInDatabase('artist', array(
+            'id'    => 1,
         ));
 
-        $i->seeResponseCodeIs(Response::HTTP_BAD_REQUEST);
-    }
+        $i->sendDELETE(ApiArtistPage::route('/1.json'));
 
-    public function patchWithValidIdAndValidDataReturns204(ApiGuy $i)
-    {
-        $originalName = 'The Rolling Stones';
-        $dob = new \DateTime('1900-01-01 00:00:00');
-
-        $i->sendPATCH(ApiArtistPage::route('/2.json'), array(
-            'dob' => $dob->format('Y-m-d H:i:s'),
-        ));
-
-        $newDob = $i->grabFromDatabase('artist', 'dob', array(
-            'id'  => 2
-        ));
-
-        $existingName = $i->grabFromDatabase('artist', 'name', array(
-            'id'  => 2
+        $i->dontSeeInDatabase('artist', array(
+            'id'    => 1,
         ));
 
         $i->seeResponseCodeIs(Response::HTTP_NO_CONTENT);
-        $i->canSeeHttpHeader('Location', ApiArtistPage::route('/2', true, true));
-        $i->assertEquals($dob, new \DateTime($newDob));
-        $i->assertEquals($originalName, $existingName);
     }
+
 }

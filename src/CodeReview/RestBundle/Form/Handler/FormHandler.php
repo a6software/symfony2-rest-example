@@ -39,4 +39,12 @@ class FormHandler
 
         return $data;
     }
+
+    public function delete($object)
+    {
+        $this->em->remove($object);
+        $this->em->flush();
+
+        return true;
+    }
 }

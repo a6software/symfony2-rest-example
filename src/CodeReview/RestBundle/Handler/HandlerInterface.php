@@ -38,4 +38,10 @@ interface HandlerInterface
      * @return mixed
      */
     public function patch(ArtistInterface $artistInterface, array $parameters);
+
+    /**
+     * @param ArtistInterface $artistInterface
+     * @return mixed
+     */
+    public function delete(ArtistInterface $artistInterface);
 }

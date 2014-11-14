@@ -139,6 +139,13 @@ class ArtistController extends FOSRestController
     }
 
 
+    public function deleteArtistAction(Request $request, $id)
+    {
+        $artist = $this->getOr404($id);
+
+        $this->getHandler()->delete($artist);
+    }
+
     protected function getOr404($id)
     {
         $handler = $this->getHandler();
