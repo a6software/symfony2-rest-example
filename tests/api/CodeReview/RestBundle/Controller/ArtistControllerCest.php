@@ -201,6 +201,7 @@ class ArtistControllerCest
 
     public function patchWithValidIdAndValidDataReturns204(ApiGuy $i)
     {
+        $originalName = 'The Rolling Stones';
         $dob = new \DateTime('1900-01-01 00:00:00');
 
         $i->sendPATCH(ApiArtistPage::route('/2.json'), array(
@@ -211,8 +212,13 @@ class ArtistControllerCest
             'id'  => 2
         ));
 
+        $existingName = $i->grabFromDatabase('artist', 'name', array(
+            'id'  => 2
+        ));
+
         $i->seeResponseCodeIs(Response::HTTP_NO_CONTENT);
         $i->canSeeHttpHeader('Location', ApiArtistPage::route('/2', true, true));
         $i->assertEquals($dob, new \DateTime($newDob));
+        $i->assertEquals($originalName, $existingName);
     }
 }
