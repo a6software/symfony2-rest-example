@@ -1,6 +1,5 @@
 security:
 
-
     providers:
         in_memory:
             memory: ~
@@ -11,5 +10,5 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
+        our_firewall:
             anonymous: ~
