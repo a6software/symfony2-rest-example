@@ -49,8 +49,8 @@ class ArtistController extends FOSRestController
      *  description="Returns a collection of Artists",
      *  section="Artists",
      *  requirements={
-     *      {"name"="limit", "dataType"="integer", "requirement"="\d+" "description"="the max number of records to return"},
-     *  }
+     *      {"name"="limit", "dataType"="integer", "requirement"="\d+", "description"="the max number of records to return"}
+     *  },
      *  parameters={
      *      {"name"="limit", "dataType"="integer", "required"=true, "description"="the max number of records to return"},
      *      {"name"="offset", "dataType"="integer", "required"=false, "description"="the record number to start results at"}
@@ -74,7 +74,7 @@ class ArtistController extends FOSRestController
      * @ApiDoc(
      *  resource=true,
      *  description="Creates a new Artist",
-     *  input = "CodeReview\RestBundle\Form\Type\ArtistFormType"
+     *  input = "CodeReview\RestBundle\Form\Type\ArtistFormType",
      *  output = "CodeReview\RestBundle\Entity\Artist",
      *  section="Artists",
      *  statusCodes={
@@ -116,7 +116,7 @@ class ArtistController extends FOSRestController
      * @ApiDoc(
      *  resource=true,
      *  description="Replaces an existing Artist",
-     *  input = "CodeReview\RestBundle\Form\Type\ArtistFormType"
+     *  input = "CodeReview\RestBundle\Form\Type\ArtistFormType",
      *  output = "CodeReview\RestBundle\Entity\Artist",
      *  section="Artists",
      *  statusCodes={
@@ -166,12 +166,12 @@ class ArtistController extends FOSRestController
      * @ApiDoc(
      *  resource=true,
      *  description="Updates an existing Artist",
-     *  input = "CodeReview\RestBundle\Form\Type\ArtistFormType"
+     *  input = "CodeReview\RestBundle\Form\Type\ArtistFormType",
      *  output = "CodeReview\RestBundle\Entity\Artist",
      *  section="Artists",
      *  statusCodes={
      *         204="Returned when an existing Artist has been successfully updated",
-     *         400="Returned when the posted data is invalid"
+     *         400="Returned when the posted data is invalid",
      *         404="Returned when trying to update a non existent Artist"
      *     }
      * )
@@ -208,8 +208,8 @@ class ArtistController extends FOSRestController
      *  description="Deletes an existing Artist",
      *  section="Artists",
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+" "description"="the id of the Artist to delete"},
-     *  }
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="the id of the Artist to delete"}
+     *  },
      *  statusCodes={
      *         204="Returned when an existing Artist has been successfully deleted",
      *         404="Returned when trying to delete a non existent Artist"
