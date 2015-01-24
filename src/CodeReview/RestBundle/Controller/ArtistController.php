@@ -42,6 +42,21 @@ class ArtistController extends FOSRestController
     }
 
     /**
+     * Returns a collection of Artists filtered by optional criteria
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Returns a collection of Artists",
+     *  section="Artists",
+     *  requirements={
+     *      {"name"="limit", "dataType"="integer", "requirement"="\d+" "description"="the max number of records to return"},
+     *  }
+     *  parameters={
+     *      {"name"="limit", "dataType"="integer", "required"=true, "description"="the max number of records to return"},
+     *      {"name"="offset", "dataType"="integer", "required"=false, "description"="the record number to start results at"}
+     *  }
+     * )
+     *
      * @QueryParam(name="limit", requirements="\d+", default="10", description="our limit")
      * @QueryParam(name="offset", requirements="\d+", nullable=true, default="0", description="our offset")
      *
@@ -56,6 +71,18 @@ class ArtistController extends FOSRestController
     }
 
     /**
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Creates a new Artist",
+     *  input = "CodeReview\RestBundle\Form\Type\ArtistFormType"
+     *  output = "CodeReview\RestBundle\Entity\Artist",
+     *  section="Artists",
+     *  statusCodes={
+     *         201="Returned when a new Artist has been successfully created",
+     *         400="Returned when the posted data is invalid"
+     *     }
+     * )
+     *
      * @View()
      *
      * @param Request $request
@@ -85,6 +112,24 @@ class ArtistController extends FOSRestController
     }
 
 
+    /**
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Replaces an existing Artist",
+     *  input = "CodeReview\RestBundle\Form\Type\ArtistFormType"
+     *  output = "CodeReview\RestBundle\Entity\Artist",
+     *  section="Artists",
+     *  statusCodes={
+     *         201="Returned when a new Artist has been successfully created",
+     *         204="Returned when an existing Artist has been successfully updated",
+     *         400="Returned when the posted data is invalid"
+     *     }
+     * )
+     *
+     * @param Request $request
+     * @param         $id
+     * @return array|\FOS\RestBundle\View\View|null
+     */
     public function putArtistAction(Request $request, $id)
     {
         $artist = $this->getHandler()->get($id);
@@ -117,6 +162,24 @@ class ArtistController extends FOSRestController
     }
 
 
+    /**
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Updates an existing Artist",
+     *  input = "CodeReview\RestBundle\Form\Type\ArtistFormType"
+     *  output = "CodeReview\RestBundle\Entity\Artist",
+     *  section="Artists",
+     *  statusCodes={
+     *         204="Returned when an existing Artist has been successfully updated",
+     *         400="Returned when the posted data is invalid"
+     *         404="Returned when trying to update a non existent Artist"
+     *     }
+     * )
+     *
+     * @param Request $request
+     * @param         $id
+     * @return array|\FOS\RestBundle\View\View|null
+     */
     public function patchArtistAction(Request $request, $id)
     {
         try {
@@ -139,6 +202,23 @@ class ArtistController extends FOSRestController
     }
 
 
+    /**
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Deletes an existing Artist",
+     *  section="Artists",
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+" "description"="the id of the Artist to delete"},
+     *  }
+     *  statusCodes={
+     *         204="Returned when an existing Artist has been successfully deleted",
+     *         404="Returned when trying to delete a non existent Artist"
+     *     }
+     * )
+     *
+     * @param Request $request
+     * @param         $id
+     */
     public function deleteArtistAction(Request $request, $id)
     {
         $artist = $this->getOr404($id);
@@ -146,6 +226,12 @@ class ArtistController extends FOSRestController
         $this->getHandler()->delete($artist);
     }
 
+    /**
+     * Returns a record by id, or throws a 404 error
+     *
+     * @param $id
+     * @return mixed
+     */
     protected function getOr404($id)
     {
         $handler = $this->getHandler();
@@ -158,6 +244,11 @@ class ArtistController extends FOSRestController
         return $data;
     }
 
+    /**
+     * Returns the required handler for this controller
+     *
+     * @return \CodeReview\RestBundle\Handler\ArtistHandler
+     */
     private function getHandler()
     {
         return $this->get('code_review.rest_bundle.artist_handler');
