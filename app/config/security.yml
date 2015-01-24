@@ -15,7 +15,13 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        our_firewall:
+        our_get_artists_firewall:
+            pattern: ^/
+            anonymous: true
+            methods: [GET]
+
+        our_everything_else_artists_firewall:
+            pattern: ^/
             anonymous: false
             http_basic:
                 provider: in_memory
