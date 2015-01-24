@@ -7,6 +7,7 @@ class ArtistControllerCest
 {
     public function _before(ApiGuy $i)
     {
+        $i->amHttpAuthenticated('rest_user', 'password123');
     }
 
     public function _after(ApiGuy $i)

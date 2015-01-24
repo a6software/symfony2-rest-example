@@ -1,8 +1,13 @@
 security:
 
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
     providers:
         in_memory:
-            memory: ~
+            memory:
+                users:
+                    rest_user: { password: password123 }
 
 
     firewalls:
@@ -11,4 +16,6 @@ security:
             security: false
 
         our_firewall:
-            anonymous: ~
+            anonymous: false
+            http_basic:
+                provider: in_memory
