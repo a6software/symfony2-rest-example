@@ -15,9 +15,12 @@ class ArtistType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text')
+            ->add('name', 'text', array(
+                'required' => true,
+            ))
             ->add('dob', 'datetime', array(
                 'widget'    => 'single_text',
+                'required'  => true,
             ))
         ;
     }

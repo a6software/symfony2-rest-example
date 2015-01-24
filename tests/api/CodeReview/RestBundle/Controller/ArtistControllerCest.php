@@ -104,6 +104,13 @@ class ArtistControllerCest
         ));
     }
 
+    public function postWithEmptyFieldsReturns400ErrorCode(ApiGuy $i)
+    {
+        $i->sendPOST(ApiArtistPage::$URL, array());
+
+        $i->seeResponseCodeIs(Response::HTTP_BAD_REQUEST);
+    }
+
     public function postWithBadFieldsReturns400ErrorCode(ApiGuy $i)
     {
         $i->sendPOST(ApiArtistPage::$URL, array(
