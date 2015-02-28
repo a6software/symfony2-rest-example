@@ -101,8 +101,9 @@ class ArtistController extends FOSRestController
                 '_format'    => $request->get('_format'),
             );
 
-            return $this->redirectView(
-                $this->generateUrl('get_artist', $routeOptions),
+            return $this->routeRedirectView(
+                'get_artist',
+                $routeOptions,
                 Response::HTTP_CREATED
             );
 

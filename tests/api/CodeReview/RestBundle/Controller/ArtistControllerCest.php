@@ -135,7 +135,7 @@ class ArtistControllerCest
         ));
 
         $i->seeResponseCodeIs(Response::HTTP_CREATED);
-        $i->canSeeHttpHeader('Location', ApiArtistPage::route('/' . $id, true));
+        $i->canSeeHttpHeader('Location', ApiArtistPage::route('/' . $id, true, true));
     }
 
 
